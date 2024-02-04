@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="environmentType" source="spring.profiles.active" defaultValue=""/>
+    <springProperty scope="context" name="bankName" source="minefocus.basics.organization-name"
+                    defaultValue="mineFocus"/>
+    <springProperty scope="context" name="systemType" source="minefocus.basics.type" defaultValue=""/>
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--            <charset>UTF-8</charset>-->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}][${bankName}][{${environmentType}}][${systemType}][%-5p][%X{sessionId:--}:%X{userId:--}][%X{x_forwarded_for:--}] --- [%-16.16t] %-60.60c:%-5L - %m%n
+            </pattern>
+        </encoder>
+    </appender>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="TRACE"/>
+    <root level="DEBUG">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>

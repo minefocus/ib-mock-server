@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="Shift_JIS">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
+<!--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"-->
+<!--            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"-->
+<!--            crossorigin="anonymous"></script>-->
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/reset.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/emusc_IK.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/SwKeyboard.css}"/>
+    <title>detail</title>
+</head>
+<script type="text/javascript">
+        $(function(){
+        var next = $("input[name='next']").val()
+        if(next == '0'){
+            $("input[name='nextPage']").attr('type','hidden')
+        }
+        })
+   </script>
+<body id="web_body" marginwidth="0" marginheight="0" leftmargin="0" topmargin="0">
+<!-- header -->
+<header class="wrapper"></header>
+<!-- contents -->
+<div class="wrapper_isweb">
+    <article id="mainContents1">
+        <hr class="boldLine">
+        <h1 id="title_isweb">入出金明細
+        </h1>
+        <hr>
+        <div id="contents1">
+            <div id="main1">
+                <form autocomplete="off" id="f1" name="f1" th:action="@{/yamagatabank.data.server/YGIK01/BankIS}"
+                      method="post">
+                    <input type="hidden" name="xtr" value="iszsmeisai01000">
+                    <input type="hidden" name="Token" value="48be8cef4f50da5d544017b316263ce4">
+                    <input type="hidden" name="NLS" value="ISP">
+                    <input type="hidden" name="TrnSeq" value="4_5">
+                    <input type="hidden" name="JS" value="">
+                    <input type="hidden" name="Page" value="1">
+                    <input type="hidden" name="SelectNo" value="0">
+                    <input type="hidden" name="Today" value="Sitei">
+                    <input type="hidden" name="next" th:value="${next}">
+                    <input type="hidden" name="accntNo" th:value="${accntNo}">
+                    <div id="err_msg" th:text="${err_msg}"></div>
+                    <div id="kbn_msg"><span>
+「照会期間」を選択して「照会」ボタンを押してください。<br>
+</span></div>
+                    <div class="table_area">
+                        <table class="block_item_list_is1">
+                            <tbody>
+                            <tr>
+                                <th style="width:85px;">照会口座</th>
+                                <td colspan="3" class="AlVm" style="width:600px;">
+                                    インターネット支店&nbsp;普通&nbsp;4723
+                                </td>
+                                <td class="AlVm" rowspan="4" style="width:115px;">
+                                    <input type="button" name="ShowBut" value="照会" class="disp_B6" tabindex="100"
+                                           onclick="">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="width:85px;" rowspan="2">照会期間</th>
+                                <td colspan="3" class="AlVm border_right_need">
+                                    <div>
+                                        <input type="radio" name="Period" id="Period4" value="SearchDate" tabindex="100"
+                                               checked>
+                                        <label for="Period4">期間指定</label>
+                                    </div>
+                                    <div class="zs_margin_left">
+                                        <select name="SearchYearFrom" id="SearchYearFrom" style="height:36px;"
+                                                tabindex="100">
+                                            <option value="2022">2022年</option>
+                                            <option value="2023">2023年</option>
+                                            <option value="2024">2024年</option>
+                                            <option value="2025">2025年</option>
+                                            <option value="2026">2026年</option>
+                                        </select>
+                                        <select name="SearchMonthFrom" id="SearchMonthFrom" style="height:36px;"
+                                                tabindex="100">
+                                            <option value="01">01月</option>
+                                            <option value="02">02月</option>
+                                            <option value="03">03月</option>
+                                            <option value="04">04月</option>
+                                            <option value="05">05月</option>
+                                            <option value="06">06月</option>
+                                            <option value="07">07月</option>
+                                            <option value="08">08月</option>
+                                            <option value="09">09月</option>
+                                            <option value="10">10月</option>
+                                            <option value="11">11月</option>
+                                            <option value="12">12月</option>
+                                        </select>
+                                        <select name="SearchDayFrom" id="SearchDayFrom" style="height:36px;"
+                                                tabindex="100">
+                                            <option value="01">01日</option>
+                                            <option value="02">02日</option>
+                                            <option value="03">03日</option>
+                                            <option value="04">04日</option>
+                                            <option value="05">05日</option>
+                                            <option value="06">06日</option>
+                                            <option value="07">07日</option>
+                                            <option value="08">08日</option>
+                                            <option value="09">09日</option>
+                                            <option value="10">10日</option>
+                                            <option value="11">11日</option>
+                                            <option value="12">12日</option>
+                                            <option value="13">13日</option>
+                                            <option value="14">14日</option>
+                                            <option value="15">15日</option>
+                                            <option value="16">16日</option>
+                                            <option value="17">17日</option>
+                                            <option value="18">18日</option>
+                                            <option value="19">19日</option>
+                                            <option value="20">20日</option>
+                                            <option value="21">21日</option>
+                                            <option value="22">22日</option>
+                                            <option value="23">23日</option>
+                                            <option value="24">24日</option>
+                                            <option value="25">25日</option>
+                                            <option value="26">26日</option>
+                                            <option value="27">27日</option>
+                                            <option value="28">28日</option>
+                                            <option value="29">29日</option>
+                                            <option value="30">30日</option>
+                                            <option value="31">31日</option>
+                                        </select>
+                                        -
+                                        <select name="SearchYearTo" id="SearchYearTo" style="height:36px;"
+                                                tabindex="100">
+                                            <option value="2022">2022年</option>
+                                            <option value="2023">2023年</option>
+                                            <option value="2024">2024年</option>
+                                            <option value="2025">2025年</option>
+                                            <option value="2026">2026年</option>
+                                        </select>
+                                        <select name="SearchMonthTo" id="SearchMonthTo" style="height:36px;"
+                                                tabindex="100">
+                                            <option value="01">01月</option>
+                                            <option value="02">02月</option>
+                                            <option value="03">03月</option>
+                                            <option value="04">04月</option>
+                                            <option value="05">05月</option>
+                                            <option value="06">06月</option>
+                                            <option value="07">07月</option>
+                                            <option value="08">08月</option>
+                                            <option value="09">09月</option>
+                                            <option value="10">10月</option>
+                                            <option value="11">11月</option>
+                                            <option value="12">12月</option>
+                                        </select>
+                                        <select name="SearchDayTo" id="SearchDayTo" style="height:36px;" tabindex="100">
+                                            <option value="01">01日</option>
+                                            <option value="02">02日</option>
+                                            <option value="03">03日</option>
+                                            <option value="04">04日</option>
+                                            <option value="05">05日</option>
+                                            <option value="06">06日</option>
+                                            <option value="07">07日</option>
+                                            <option value="08">08日</option>
+                                            <option value="09">09日</option>
+                                            <option value="10">10日</option>
+                                            <option value="11">11日</option>
+                                            <option value="12">12日</option>
+                                            <option value="13">13日</option>
+                                            <option value="14">14日</option>
+                                            <option value="15">15日</option>
+                                            <option value="16">16日</option>
+                                            <option value="17">17日</option>
+                                            <option value="18">18日</option>
+                                            <option value="19">19日</option>
+                                            <option value="20">20日</option>
+                                            <option value="21">21日</option>
+                                            <option value="22">22日</option>
+                                            <option value="23">23日</option>
+                                            <option value="24">24日</option>
+                                            <option value="25">25日</option>
+                                            <option value="26">26日</option>
+                                            <option value="27">27日</option>
+                                            <option value="28">28日</option>
+                                            <option value="29">29日</option>
+                                            <option value="30">30日</option>
+                                            <option value="31">31日</option>
+                                        </select>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="AlVm border_right_none">
+                                    <label>前月の明細</label>
+                                </td>
+                                <td class="AlVm border_right_none">
+                                    <label>今月の明細</label>
+                                </td>
+                                <td class="AlVm  border_right_need">
+                                    <label>当日の明細</label>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <th style="width:85px;">表示件数</th>
+                                <td colspan="3" class="AlVm border_right_need">
+								<span>
+<select name="DispCount" style="height:36px;" tabindex="100">
+<option value="10" selected="">10</option>
+<option value="20">20</option>
+<option value="50">50</option>
+<option value="100">100</option>
+</select>
+件ずつ表示</span>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="kijun_date"><span></span></div>
+                    <div class="table_area">
+                        <table style="width:955px" class="ArVm">
+                            <tbody>
+                            <tr>
+                                <td style="width:300px" class="AlVm"></td>
+                                <td style="width:150px" class="AcVm fontStrong"></td>
+                                <td style="width:300px" class="ArVm"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="table_area">
+                            <div class="ArVm">
+                                <input style="width:300px" type="hidden" th:name="${next != 0}?'Next':'unNext'">
+                            </div>
+                            <input type="submit" name="nextPage" value="Next" class="disp_B6" tabindex="100">
+                            <!---->
+                            <table class="table_list1" id="tableInfo">
+                                <tbody>
+                                <tr>
+                                    <th style="width:100px">日付</th>
+                                    <th style="width:150px">お引出し金額</th>
+                                    <th style="width:150px">お預入れ金額</th>
+                                    <th style="width:200px">摘要</th>
+                                    <th style="width:150px">差引残高</th>
+                                </tr>
+                                <tr th:each="item: ${data}">
+                                    <td style="width:100px" th:text="${item.transactionDate}">日付</td>
+                                    <td style="width:150px" th:text="${item.amount}">お引出し金額</td>
+                                    <td style="width:150px" th:text="${item.amount2}">お預入れ金額</td>
+                                    <td style="width:200px" th:text="${item.transactionDetail}">摘要</td>
+                                    <td style="width:150px" th:text="${item.transactionBalance}">差引残高</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <table style="width:955px" class="ArVm">
+                            <tbody>
+                            <tr>
+                                <td style="width:300px" class="AlVm"></td>
+                                <td style="width:150px" class="AcVm fontStrong"></td>
+                                <td style="width:300px" class="ArVm"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <br>
+                    </div>
+                    <div id="kbn_html"><span>操作を終了されたい場合は、「ログオフ」ボタンを押してください</span><br></div>
+                    <div class="button_c1">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </article>
+    <!-- subContents -->
+
+</div>
+
+</body>
+</html>

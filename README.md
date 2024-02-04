@@ -1,0 +1,1 @@
+# yamagatabank-data-server

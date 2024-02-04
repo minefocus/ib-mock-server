@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="Shift_JIS">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
+<!--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"-->
+<!--            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"-->
+<!--            crossorigin="anonymous"></script>-->
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/reset.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/emusc_IK.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/SwKeyboard.css}"/>
+    <title>login</title>
+
+</head>
+    <script type="text/javascript">
+        function check(){
+        var branchNo = $("input[name='BranchNo']").val()
+        var accntNo = $("input[name='AccntNo']").val()
+        var passWord = $("input[name='passWord']").val()
+        if (branchNo == '' || branchNo == undefined) {
+            alert('店番号なし')
+            return false;
+        } else if (accntNo == '' || accntNo == undefined) {
+            alert('口座番号なし')
+            return false;
+        } else if (passWord == '' || passWord == undefined) {
+            alert('パスワードなし')
+            return false;
+        }
+        return ture;
+        }
+   </script>
+<body>
+<is_body marginwidth="0" marginheight="0" leftmargin="0" topmargin="0">
+    <!-- contents -->
+    <div class="wrapper">
+        <!-- contentsMenu -->
+
+        <article id="mainContents_center">
+            <hr class="boldLine">
+            <h1 id="title">cui test</h1>
+            <hr>
+            <div id="main_center">
+                <form id="f1" name="f1" th:action="@{/yamagatabank.data.server/YGIK01/BankIS}" method="post" onsubmit="return check()">
+                    <input type="hidden" name="xtr" value="isktinit01000">
+                    <input type="hidden" name="Token" value="null">
+                    <input type="hidden" name="NLS" value="ISP">
+                    <input type="hidden" name="fontsize" value="null">
+                    <input type="hidden" name="bgcolor" value="null">
+                    <input type="hidden" name="JS" value="">
+                    <input type="hidden" name="TPSessionID" value="">
+                    <div id="err_msg_home" th:text="${errMsgHome}"></div>
+                    <div class="box_area">
+					<span class="AlVt_is">
+						「店番号・口座番号」、および「ログオンパスワード」を入力し、「ログオン」ボタンを押してください。
+					</span><br>
+                        <span class="AlVt_is">
+						なお、ご利用には画面下部の「新規お申し込み」ボタンから口座ごとに利用申込が必要です。
+					</span>
+                        <div class="logon_table_area_is">
+                            <table class="logon_block_item_list1">
+                                <tbody>
+                                <tr>
+                                    <th style="width:200px">店番号<br>【半角数字3桁】</th>
+                                    <td colspan="3">
+                                        <input type="text_is" name="BranchNo" value="" tabindex="100" class="ImeOff"
+                                               maxlength="7" size="10" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>科目</th>
+                                    <td colspan="3">普通</td>
+                                </tr>
+                                <tr>
+                                    <th>口座番号<br>【半角数字、ハイフンなし】</th>
+                                    <td colspan="3">
+                                        <input type="text_is" name="AccntNo" value="" tabindex="100" class="ImeOff"
+                                               maxlength="7" size="10" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="width:200px">ログオンパスワード<br>【半角英数6桁】</th>
+                                    <td colspan="2">
+                                        <div class="logon_softkey_area">
+                                            <input type="text_is" name="passWord" value="" tabindex="100" class="ImeOff" maxlength="7" size="10" autocomplete="off">
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        通常のキーボードから入力する場合は、左記のチェックをクリックしてはずし、以下の入力欄にログオンパスワードを入力してください。<br>
+                                        ※お客さまの安全のためソフトウェアキーボードを使用されることをお勧めいたします。
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="button_c">
+                            <input type="submit" name="Logon" value="ログオン" class="disp_B" tabindex="100"><br>
+                            <br><br>
+                            <span class="fontStrong">
+						〈やまぎん〉かんたん残高照会サービスを新規お申し込みの方は、以下のボタンをクリックしてください。<br>
+						ログオンできない場合（パスワードを忘れた・登録切れ等）、新規お申し込みより、再度申込みをしてください。
+						</span><br>
+                            <br>
+                            <input type="submit" name="Create" value="新規お申し込み" class="logon_disp_B2" tabindex="100"
+                                   onclick=""><br>
+                        </div>
+                        <br>
+                        <table border="1" align="center">
+                            <caption class="caption_is">◆ご利用時間◆</caption>
+                            <tbody>
+                            <tr align="center">
+                                <th width="200" height="30">曜&nbsp;&nbsp;日</th>
+                                <th width="200" height="30">時&nbsp;&nbsp;間</th>
+                            </tr>
+                            <tr align="center">
+                                <td width="200" height="30">平&nbsp;&nbsp;日</td>
+                                <td width="200" height="30">7：00&nbsp;〜&nbsp;23：00</td>
+                            </tr>
+                            <tr align="center">
+                                <td width="200" height="30">土・日・祝日</td>
+                                <td width="200" height="30">8：00&nbsp;〜&nbsp;21：00</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    </div>
+                    <div id="main_center_logon">
+                        <div align="center">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td style="height:59px;width:737px;">
+                                        <table class="homeMsgTable">
+                                            <tbody>
+                                            <tr>
+                                                <td style="height:2px;width:737px;">
+                                                    <span class="ActMsg"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="msgColor"><span
+                                                        class="ActMsg">ただいまサービス中です。(mc:6201-10005)</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height:2px;"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </article>
+    </div>
+</is_body>
+
+</body>
+</html>

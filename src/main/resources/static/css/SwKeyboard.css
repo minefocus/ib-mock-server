@@ -1,0 +1,61 @@
+	table.nsborder {
+		background-color : #FFFFFF;
+		border-color : #FFFFFF;
+		border-style: solid;
+		margin-left: auto;
+		margin-right: auto ;
+	}
+	table.keyboard {
+		border-color : #D7EFEF;
+		background-color : #D7EFEF;
+		border-width: 1px;
+		border-style: solid;
+		margin-left: auto;
+		margin-right: auto ;
+		width : 400pt ;
+	}
+	table.keyboardCfm {
+		border-color : #AFAFAF;
+		background-color : #D7EFEF;
+		margin-left: auto;
+		margin-right: auto ;
+		width : 300pt ;
+	}
+
+	table.keyboardWC {
+		border-color : #D7EFEF;
+		background-color : #D7EFEF;
+		border-style: solid;
+		margin-left: auto;
+		margin-right: auto ;
+		width : 300pt ;
+	}
+	table.exprain {
+		background-color : #FFFFFF;
+		border-color : #FFFFFF;
+		border-style: solid;
+		margin-left: auto;
+		margin-right: auto ;
+		width : 100% ;
+	}
+	.copyright {
+		background-color : #FFFFFF;
+		text-align : right;
+	}
+	.key {
+		background-color : #FFFFFF;
+	}
+	.explanation {
+		background-color : #EEEEEE;
+		text-align : left;
+		font-size : 10pt;
+	}
+	.text12k {
+		FONT-SIZE: 12px; COLOR: #000000
+	}
+	.Number {
+		width: 30px;
+	}
+	.Alfa {
+		width: 30px;
+	}

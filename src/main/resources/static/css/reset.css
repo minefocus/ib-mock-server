@@ -1,0 +1,131 @@
+.menuBtn,
+.menuBtnIS,
+.submenu_B,
+.submenu_B1,
+#logo_img,
+.disp_B,
+.logon_disp_B,
+.back_B,
+.table_B,
+.logout_B,
+.pageOn_B,
+.pageOff_B,
+.On_B,
+.Off_B,
+.top_B,
+.menu_B,
+.freqBank_B,
+.kana50_B,
+.bankTypeSel_B,
+.bankTypeSelOn_B,
+.link_B,
+.logon_page_B,
+.String_B,
+.simpleLink_B,
+.disp_B3,
+.freqBank_B1,
+.disp_B1,
+.disp_B5,
+.table_B2,
+.softkey_B,
+.softkey_B_isweb,
+.softkey_B1,
+.softkey_disp_B,
+.menuBtn_H,
+.back_B1,
+.submenu_top_B,
+.submenu_top_B_is,
+.submenu_top_B_istop,
+.submenu_B1,
+.submenu_B_isweb,
+.subContent_submenu_B_isweb,
+.print_BÅC
+.softkey_back_B,
+.disp_B6,
+.table_B1,
+.logon_disp_B2 {
+	height: auto;
+	line-height: 1;
+	margin: 0;
+	padding: 0;
+	-webkit-border-radius: 0;
+	-webkit-appearance: none;
+}
+
+header.wrapper,
+body,
+is_body,
+#menuÅC
+#ismenu,
+#web_body {
+	display: block;
+	line-height: 1;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+}
+
+body {
+        -webkit-text-size-adjust: 100%;
+}
+
+#web_body {
+        -webkit-text-size-adjust: 100%;
+}
+
+is_body {
+        -webkit-text-size-adjust: 100%;
+}
+
+span,
+p,
+th,
+td {
+	font-size: 0;
+	margin: 0;
+	padding: 0;
+}
+
+hr {
+	height: 1px;
+}
+
+br {
+	clear: both;
+}
+
+select,
+input[type="checkbox"] {
+	-webkit-border-radius: 0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="text_is"] {
+	-webkit-border-radius: 0;
+	-webkit-appearance: none;
+}
+
+.globalButton,
+.globalButtonBold,
+.subContents_area_Btn,
+.subContent_submenu_B_is,
+.subContent_submenu_B {
+	height: auto;
+	-webkit-border-radius: 0;
+	-webkit-appearance: none;
+}
+
+.globalButtonBold_nolink {
+	height: 0;
+	margin: 0;
+	padding: 0;
+	width: 0;
+}
+
+.subContents_area,
+.subContents_area_Link,
+.subContents_area_Link_area {
+	margin: 0;
+	padding: 0;
+}
