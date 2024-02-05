@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author cht
@@ -75,6 +76,7 @@ public class CommonController {
                 throw new SbcfRequestException();
             }, map);
             if (response.isPresent()) {
+                TimeUnit.SECONDS.sleep(response.get().getSleep());
                 model.addAttribute("data", response.get().getDetailList());
                 model.addAttribute("next", Integer.valueOf(response.get().getNext()));
                 model.addAttribute("err_msg", response.get().getErr_msg());
