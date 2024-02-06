@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.pactera</groupId>
-    <artifactId>yamagatabank-data-server</artifactId>
+    <artifactId>ib-mock-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>yamagatabank-data-server</name>
+    <name>ib-mock-server</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -91,28 +91,28 @@
             </activation>
             <properties>
                 <profiles.active>local</profiles.active>
-                <file.name>local-yamagatabank-data-server</file.name>
+                <file.name>local-ib-mock-server</file.name>
             </properties>
         </profile>
         <profile>
             <id>dev</id>
             <properties>
                 <profiles.active>dev</profiles.active>
-                <file.name>dev-yamagatabank-data-server</file.name>
+                <file.name>dev-ib-mock-server</file.name>
             </properties>
         </profile>
         <profile>
             <id>stg</id>
             <properties>
                 <profiles.active>stg</profiles.active>
-                <file.name>stg-yamagatabank-data-server</file.name>
+                <file.name>stg-ib-mock-server</file.name>
             </properties>
         </profile>
         <profile>
             <id>prod</id>
             <properties>
                 <profiles.active>prod</profiles.active>
-                <file.name>yamagatabank-data-server</file.name>
+                <file.name>ib-mock-server</file.name>
             </properties>
         </profile>
     </profiles>

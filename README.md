@@ -1,1 +1,1 @@
-# yamagatabank-data-server
+# ib-mock-server
