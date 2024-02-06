@@ -36,7 +36,7 @@
     <article id="mainContents_top">
         <hr class="boldLine">
         <div id="main_top">
-            <form autocomplete="off" id="f1" name="f1" th:action="@{/yamagatabank.data.server/YGIK01/BankIS}"
+            <form autocomplete="off" id="f1" name="f1" th:action="${actionUrl}"
                   method="post">
                 <input type="hidden" name="xtr" value="iszsmeisai01000">
                 <input type="hidden" name="Token" value="10ec2687dccf9c131122e045d6c13d52">
@@ -57,6 +57,7 @@
                 <div>
                     <span class="fontStrong_is fontBig block_title_sub_is">口座残高</span>
                     <span class="kijun_date" th:text="${data.kijun_date}">2024年01月15日&nbsp;16時49分&nbsp;現在</span>
+                    <div class="kijun_date" th:text="${data.kijun_date}">2024年01月15日&nbsp;16時49分&nbsp;現在</div>
                 </div>
                 <table class="top_item_table">
                     <tbody>

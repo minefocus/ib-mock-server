@@ -1,19 +1,18 @@
-package com.pactera.dataserver.core.sbcf.configuration;
+package com.pactera.dataserver.core.ib.configuration;
 
 import com.pactera.dataserver.core.http.RemoteApi;
 import org.springframework.http.HttpMethod;
 
 /**
- * @author Pactera WangShuai
- * @date 2019/12/02 9:32
+ * @author cht
  */
 public enum ApiEnum implements RemoteApi {
     /**
      *
      */
-    login(HttpMethod.GET, "/yamagata_data_server/login/{accntNo}"),
-    home(HttpMethod.GET, "/yamagata_data_server/home/{accntNo}"),
-    detail(HttpMethod.GET, "/yamagata_data_server/detail/{searchDateFrom}/{searchDateTo}/{next}/{accntNo}");
+    login(HttpMethod.GET, "/login/{accntNo}"),
+    home(HttpMethod.GET, "/home/{accntNo}"),
+    detail(HttpMethod.GET, "/detail/{searchDateFrom}/{searchDateTo}/{next}/{accntNo}");
 
     private HttpMethod method;
     private String path;

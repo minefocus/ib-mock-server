@@ -33,7 +33,7 @@
         <hr>
         <div id="contents1">
             <div id="main1">
-                <form autocomplete="off" id="f1" name="f1" th:action="@{/yamagatabank.data.server/YGIK01/BankIS}"
+                <form autocomplete="off" id="f1" name="f1" th:action="${actionUrl}"
                       method="post">
                     <input type="hidden" name="xtr" value="iszsmeisai01000">
                     <input type="hidden" name="Token" value="48be8cef4f50da5d544017b316263ce4">
@@ -221,17 +221,17 @@
                     <br>
                     <div class="kijun_date"><span></span></div>
                     <div class="table_area">
-                        <table style="width:955px" class="ArVm">
+                        <table style="width:955px" class="ArVm page_isweb">
                             <tbody>
                             <tr>
                                 <td style="width:300px" class="AlVm"></td>
                                 <td style="width:150px" class="AcVm fontStrong"></td>
-                                <td style="width:300px" class="ArVm"></td>
+                                <td style="width:300px" class="ArVm page_isweb"></td>
                             </tr>
                             </tbody>
                         </table>
                         <div class="table_area">
-                            <div class="ArVm">
+                            <div class="ArVm page_isweb">
                                 <input style="width:300px" type="hidden" th:name="${next != 0}?'Next':'unNext'">
                             </div>
                             <input type="submit" name="nextPage" value="Next" class="disp_B6" tabindex="100">
@@ -255,12 +255,12 @@
                                 </tbody>
                             </table>
                         </div>
-                        <table style="width:955px" class="ArVm">
+                        <table style="width:955px" class="ArVm page_isweb">
                             <tbody>
                             <tr>
                                 <td style="width:300px" class="AlVm"></td>
                                 <td style="width:150px" class="AcVm fontStrong"></td>
-                                <td style="width:300px" class="ArVm"></td>
+                                <td style="width:300px" class="ArVm page_isweb"></td>
                             </tr>
                             </tbody>
                         </table>

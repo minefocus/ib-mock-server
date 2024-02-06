@@ -43,7 +43,7 @@
             <h1 id="title">cui test</h1>
             <hr>
             <div id="main_center">
-                <form id="f1" name="f1" th:action="@{/yamagatabank.data.server/YGIK01/BankIS}" method="post" onsubmit="return check()">
+                <form id="f1" name="f1" th:action="${actionUrl}" method="post" onsubmit="return check()">
                     <input type="hidden" name="xtr" value="isktinit01000">
                     <input type="hidden" name="Token" value="null">
                     <input type="hidden" name="NLS" value="ISP">

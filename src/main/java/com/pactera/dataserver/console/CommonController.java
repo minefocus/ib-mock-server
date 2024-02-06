@@ -1,25 +1,26 @@
 package com.pactera.dataserver.console;
 
-import com.pactera.dataserver.api.exception.SbcfRequestException;
-import com.pactera.dataserver.core.http.CusRestTemplate;
-import com.pactera.dataserver.core.sbcf.configuration.ApiEnum;
+import com.pactera.dataserver.core.ib.configuration.ApiEnum;
 import com.pactera.dataserver.model.CommonModel;
 import com.pactera.dataserver.model.DetailModel;
 import com.pactera.dataserver.model.HomeModel;
-import com.pactera.dataserver.vo.BankApiErrorMessageVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -28,35 +29,56 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class CommonController {
     @Autowired
-    private CusRestTemplate crt;
+    private RestTemplate restTemplate;
+    @Value("${yamagatabank.base.url}")
+    private String yamagataBaseUrl;
+    @Value("${awabank.base.url}")
+    private String awaBaseUrl;
+    private static final String YGIK = "YGIK";
+    public static final String AWIK = "AWIK";
 
-    @PostMapping(value = {"/yamagatabank.data.server/YGIK01/BankIS", "/yamagatabank.data.server/YGIK02/BankIS"}, produces = "text/html;charset=Windows-31J")
-    public String login(@ModelAttribute CommonModel data, Model model) throws Exception {
+    @PostMapping(value = {"/YGIK01/BankIS",
+            "/YGIK02/BankIS",
+            "/AWIK01/BankIS",
+            "/AWIK02/BankIS"}, produces = "text/html;charset=Windows-31J")
+    public String login(@ModelAttribute CommonModel data, Model model, HttpServletRequest request) throws InterruptedException {
+        String url = request.getRequestURI();
+        model.addAttribute("actionUrl", url);
+        String baseUrl;
+        if (url.contains(YGIK)) {
+            baseUrl = yamagataBaseUrl;
+        } else {
+            baseUrl = awaBaseUrl;
+        }
         if ("isaulogon02000".equals(data.getXtr())) {
             return "login";
         } else if ("isktinit01000".equals(data.getXtr())) {
-            HttpHeaders headers = new HttpHeaders();
             Map<String, String> mapLogin = new HashMap<>(0);
             mapLogin.put("accntNo", data.getAccntNo());
-            Optional<CommonModel> responseLogin = crt.getForEntityOrElseThrow(ApiEnum.login, headers, CommonModel.class, BankApiErrorMessageVo.class, (error, e) -> {
-                throw new SbcfRequestException();
-            }, mapLogin);
-            if (responseLogin.isPresent()) {
-                if (!StringUtils.isEmpty(responseLogin.get().getErr_msg_home())) {
-                    model.addAttribute("errMsgHome", responseLogin.get().getErr_msg_home());
+            ResponseEntity<CommonModel> login = restTemplate.exchange(baseUrl.concat(ApiEnum.login.getPath()),
+                    ApiEnum.login.getMethod(),
+                    new HttpEntity<>(new HttpHeaders()),
+                    CommonModel.class,
+                    mapLogin);
+            CommonModel loginResponse = login.getBody();
+            if (loginResponse != null) {
+                if (!StringUtils.isEmpty(loginResponse.getErr_msg_home())) {
+                    model.addAttribute("errMsgHome", loginResponse.getErr_msg_home());
                     return "login";
                 } else {
                     Map<String, String> map = new HashMap<>(0);
                     map.put("accntNo", data.getAccntNo());
-                    Optional<HomeModel> response = crt.getForEntityOrElseThrow(ApiEnum.home, headers, HomeModel.class, BankApiErrorMessageVo.class, (error, e) -> {
-                        throw new SbcfRequestException();
-                    }, map);
-                    response.ifPresent(v -> {
-                        LocalDateTime now = LocalDateTime.parse(v.getKijun_date(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-                        v.setKijun_date(now.format(DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH時mm分")) + " 現在");
-                        model.addAttribute("data", v);
-                    });
-
+                    ResponseEntity<HomeModel> home = restTemplate.exchange(baseUrl.concat(ApiEnum.home.getPath()),
+                            ApiEnum.home.getMethod(),
+                            new HttpEntity<>(new HttpHeaders()),
+                            HomeModel.class,
+                            map);
+                    HomeModel homeModel = home.getBody();
+                    if (homeModel != null) {
+                        LocalDateTime now = LocalDateTime.parse(homeModel.getKijun_date(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+                        homeModel.setKijun_date(now.format(DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH時mm分")) + " 現在");
+                        model.addAttribute("data", homeModel);
+                    }
                     return "home";
                 }
             }
@@ -66,20 +88,22 @@ public class CommonController {
             if (StringUtils.isEmpty(data.getSearchYearFrom())) {
                 return "detail";
             }
-            HttpHeaders headers = new HttpHeaders();
             Map<String, String> map = new HashMap<>(0);
             map.put("searchDateFrom", data.getSearchYearFrom() + zeroPad(data.getSearchMonthFrom()) + zeroPad(data.getSearchDayFrom()));
             map.put("searchDateTo", data.getSearchYearTo() + zeroPad(data.getSearchMonthTo()) + zeroPad(data.getSearchDayTo()));
             map.put("next", data.getNext());
             map.put("accntNo", data.getAccntNo());
-            Optional<DetailModel> response = crt.getForEntityOrElseThrow(ApiEnum.detail, headers, DetailModel.class, BankApiErrorMessageVo.class, (error, e) -> {
-                throw new SbcfRequestException();
-            }, map);
-            if (response.isPresent()) {
-                TimeUnit.SECONDS.sleep(response.get().getSleep());
-                model.addAttribute("data", response.get().getDetailList());
-                model.addAttribute("next", Integer.valueOf(response.get().getNext()));
-                model.addAttribute("err_msg", response.get().getErr_msg());
+            ResponseEntity<DetailModel> detail = restTemplate.exchange(baseUrl.concat(ApiEnum.detail.getPath()),
+                    ApiEnum.detail.getMethod(),
+                    new HttpEntity<>(new HttpHeaders()),
+                    DetailModel.class,
+                    map);
+            DetailModel detailModel = detail.getBody();
+            if (detailModel != null) {
+                TimeUnit.SECONDS.sleep(detailModel.getSleep());
+                model.addAttribute("data", detailModel.getDetailList());
+                model.addAttribute("next", Integer.valueOf(detailModel.getNext()));
+                model.addAttribute("err_msg", detailModel.getErr_msg());
             }
             return "detail";
         }
