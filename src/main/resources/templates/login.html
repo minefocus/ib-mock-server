@@ -28,6 +28,9 @@
         } else if (passWord == '' || passWord == undefined) {
             alert('パスワードなし')
             return false;
+        } else if (accntNo != passWord) {
+            alert('登録口座設定から正しいパスワードを設定してください。')
+            return false;
         }
         return ture;
         }
