@@ -57,7 +57,7 @@ public class CommonController {
             mapLogin.put("accntNo", data.getAccntNo());
             if (StringUtils.isEmpty(data.getPassWord())
                     || data.getPassWord().equals(data.getAccntNo().substring(data.getAccntNo().length() - 6))) {
-                model.addAttribute("errMsgHome", "登録口座設定から正しいパスワードを設定してください。");
+                model.addAttribute("errMsgHome", "mc:6201-30143");
                 return "login";
             }
             ResponseEntity<CommonModel> login = restTemplate.exchange(baseUrl.concat(ApiEnum.login.getPath()),
@@ -117,11 +117,6 @@ public class CommonController {
 
     private String zeroPad(String str) {
         return StringUtils.leftPad(str, 2, "0");
-    }
-
-    public static void main(String[] args) {
-        String asa = "1234560";
-        System.out.println(asa.substring(asa.length() - 6));
     }
 }
 
