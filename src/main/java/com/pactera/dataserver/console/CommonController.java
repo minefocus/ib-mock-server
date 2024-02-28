@@ -55,6 +55,11 @@ public class CommonController {
         } else if ("isktinit01000".equals(data.getXtr())) {
             Map<String, String> mapLogin = new HashMap<>(0);
             mapLogin.put("accntNo", data.getAccntNo());
+            if (StringUtils.isEmpty(data.getPassWord())
+                    || data.getPassWord().equals(data.getAccntNo().substring(data.getAccntNo().length() - 6))) {
+                model.addAttribute("errMsgHome", "登録口座設定から正しいパスワードを設定してください。");
+                return "login";
+            }
             ResponseEntity<CommonModel> login = restTemplate.exchange(baseUrl.concat(ApiEnum.login.getPath()),
                     ApiEnum.login.getMethod(),
                     new HttpEntity<>(new HttpHeaders()),
@@ -112,6 +117,11 @@ public class CommonController {
 
     private String zeroPad(String str) {
         return StringUtils.leftPad(str, 2, "0");
+    }
+
+    public static void main(String[] args) {
+        String asa = "1234560";
+        System.out.println(asa.substring(asa.length() - 6));
     }
 }
 
