@@ -10,7 +10,7 @@ public enum ApiEnum implements RemoteApi {
     /**
      *
      */
-    login(HttpMethod.GET, "/login/{accntNo}"),
+    login(HttpMethod.GET, "/login/{accntNo}/{password}"),
     home(HttpMethod.GET, "/home/{accntNo}"),
     detail(HttpMethod.GET, "/detail/{searchDateFrom}/{searchDateTo}/{next}/{accntNo}");
 

@@ -55,11 +55,7 @@ public class CommonController {
         } else if ("isktinit01000".equals(data.getXtr())) {
             Map<String, String> mapLogin = new HashMap<>(0);
             mapLogin.put("accntNo", data.getAccntNo());
-            if (StringUtils.isEmpty(data.getPassWord())
-                    || data.getPassWord().equals(data.getAccntNo().substring(data.getAccntNo().length() - 6))) {
-                model.addAttribute("errMsgHome", "mc:6201-30143");
-                return "login";
-            }
+            mapLogin.put("password", data.getPassWord());
             ResponseEntity<CommonModel> login = restTemplate.exchange(baseUrl.concat(ApiEnum.login.getPath()),
                     ApiEnum.login.getMethod(),
                     new HttpEntity<>(new HttpHeaders()),
