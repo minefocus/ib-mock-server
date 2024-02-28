@@ -13,7 +13,7 @@ public class CommonModel implements Serializable {
     private String branchNo;
     private String accntNo;
     private String next;
-    private String passWord;
+    private String Pass;
     private String SearchYearFrom;
     private String SearchMonthFrom;
     private String SearchDayFrom;

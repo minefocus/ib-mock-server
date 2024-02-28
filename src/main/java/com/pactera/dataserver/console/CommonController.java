@@ -55,7 +55,7 @@ public class CommonController {
         } else if ("isktinit01000".equals(data.getXtr())) {
             Map<String, String> mapLogin = new HashMap<>(0);
             mapLogin.put("accntNo", data.getAccntNo());
-            mapLogin.put("password", data.getPassWord());
+            mapLogin.put("password", data.getPass());
             ResponseEntity<CommonModel> login = restTemplate.exchange(baseUrl.concat(ApiEnum.login.getPath()),
                     ApiEnum.login.getMethod(),
                     new HttpEntity<>(new HttpHeaders()),
