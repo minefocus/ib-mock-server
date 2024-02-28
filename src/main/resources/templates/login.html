@@ -18,14 +18,14 @@
         function check(){
         var branchNo = $("input[name='BranchNo']").val()
         var accntNo = $("input[name='AccntNo']").val()
-        var passWord = $("input[name='passWord']").val()
+        var pass = $("input[name='Pass']").val()
         if (branchNo == '' || branchNo == undefined) {
             alert('店番号なし')
             return false;
         } else if (accntNo == '' || accntNo == undefined) {
             alert('口座番号なし')
             return false;
-        } else if (passWord == '' || passWord == undefined) {
+        } else if (pass == '' || pass == undefined) {
             alert('パスワードなし')
             return false;
         }
