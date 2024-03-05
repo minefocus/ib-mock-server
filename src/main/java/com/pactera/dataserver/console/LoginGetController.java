@@ -19,7 +19,11 @@ public class LoginGetController {
             "/AWIK02/BankIS",}, produces = "text/html;charset=Windows-31J")
     public String loginGet(@RequestParam("xtr") String xtr, Model model, HttpServletRequest request) {
         model.addAttribute("actionUrl", request.getRequestURI());
-        return "login";
+        if ("isasismk01000".equals(xtr)) {
+            return "user_registration_1";
+        } else {
+            return "login";
+        }
     }
 }
 

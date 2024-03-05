@@ -83,6 +83,8 @@ public class CommonController {
                     return "home";
                 }
             }
+        } else if ("isasismk01000".equals(data.getXtr())) {
+            return "user_registration_1";
         } else {
             model.addAttribute("accntNo", data.getAccntNo());
             model.addAttribute("next", data.getNext());
