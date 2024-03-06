@@ -85,6 +85,16 @@ public class CommonController {
             }
         } else if ("isasismk01000".equals(data.getXtr())) {
             return "user_registration_1";
+        } else if ("user_registration_2".equals(data.getXtr())) {
+            return "user_registration_2";
+        } else if ("user_registration_3".equals(data.getXtr())) {
+            return "user_registration_3";
+        } else if ("user_registration_4".equals(data.getXtr())) {
+            return "user_registration_4";
+        } else if ("user_registration_5".equals(data.getXtr())) {
+            return "user_registration_5";
+        } else if ("user_registration_6".equals(data.getXtr())) {
+            return "user_registration_6";
         } else {
             model.addAttribute("accntNo", data.getAccntNo());
             model.addAttribute("next", data.getNext());
@@ -110,6 +120,7 @@ public class CommonController {
             }
             return "detail";
         }
+
         return "login";
     }
 
