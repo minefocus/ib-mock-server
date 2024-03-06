@@ -83,17 +83,56 @@ public class CommonController {
                     return "home";
                 }
             }
-        } else if ("isasismk01000".equals(data.getXtr())) {
-            return "user_registration_1";
         } else if ("user_registration_2".equals(data.getXtr())) {
             return "user_registration_2";
         } else if ("user_registration_3".equals(data.getXtr())) {
+            Map<String, String> map = new HashMap<>(0);
+            map.put("EMailAddress", data.getEMailAddress());
+            ResponseEntity<CommonModel> userInfo = restTemplate.exchange(baseUrl.concat(ApiEnum.userInfo.getPath()),
+                    ApiEnum.userInfo.getMethod(),
+                    new HttpEntity<>(new HttpHeaders()),
+                    CommonModel.class,
+                    map);
+            CommonModel userInfoModel = userInfo.getBody();
+            if (userInfoModel != null) {
+                model.addAttribute("data", userInfoModel);
+            }
             return "user_registration_3";
         } else if ("user_registration_4".equals(data.getXtr())) {
+            Map<String, String> map = new HashMap<>(0);
+            map.put("CdPswdId", data.getCdPswdId());
+            ResponseEntity<CommonModel> cardPassword = restTemplate.exchange(baseUrl.concat(ApiEnum.cardPassword.getPath()),
+                    ApiEnum.cardPassword.getMethod(),
+                    new HttpEntity<>(new HttpHeaders()),
+                    CommonModel.class,
+                    map);
+            CommonModel cardPasswordModel = cardPassword.getBody();
+            if (cardPasswordModel != null) {
+                model.addAttribute("data", cardPasswordModel);
+            }
             return "user_registration_4";
         } else if ("user_registration_5".equals(data.getXtr())) {
+            Map<String, String> map = new HashMap<>(0);
+            map.put("ISUserPassword", data.getISUserPassword());
+            ResponseEntity<CommonModel> loginPassword = restTemplate.exchange(baseUrl.concat(ApiEnum.loginPassword.getPath()),
+                    ApiEnum.loginPassword.getMethod(),
+                    new HttpEntity<>(new HttpHeaders()),
+                    CommonModel.class,
+                    map);
+            CommonModel loginPasswordModel = loginPassword.getBody();
+            if (loginPasswordModel != null) {
+                model.addAttribute("data", loginPasswordModel);
+            }
             return "user_registration_5";
         } else if ("user_registration_6".equals(data.getXtr())) {
+            ResponseEntity<CommonModel> userRegistration = restTemplate.exchange(baseUrl.concat(ApiEnum.userRegistration.getPath()),
+                    ApiEnum.userRegistration.getMethod(),
+                    new HttpEntity<>(new HttpHeaders()),
+                    CommonModel.class);
+            CommonModel userRegistrationModel = userRegistration.getBody();
+            if (userRegistrationModel != null) {
+                model.addAttribute("data", userRegistrationModel);
+            }
             return "user_registration_6";
         } else {
             model.addAttribute("accntNo", data.getAccntNo());

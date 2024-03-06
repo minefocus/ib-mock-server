@@ -20,6 +20,9 @@ public class CommonModel implements Serializable {
     private String SearchYearTo;
     private String SearchMonthTo;
     private String SearchDayTo;
+    private String EMailAddress;
+    private String CdPswdId;
+    private String ISUserPassword;
     private String err_msg;
     private String err_msg_home;
     private String box_area_message;
